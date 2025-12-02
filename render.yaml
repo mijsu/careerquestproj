@@ -1,0 +1,89 @@
+# Render service configuration for CareerQuest
+# NOTE: This file contains placeholders only. Do NOT commit secrets here.
+# Before deploying, set all sensitive env vars in the Render Dashboard (Secrets).
+
+services:
+  - type: web
+    name: careerquest
+    env: node
+    plan: free
+    branch: main
+    buildCommand: npm run build
+    startCommand: npm run start
+    # Render will provide a PORT env var; server already reads process.env.PORT
+    # Do NOT set NODE_ENV here — Render handles it automatically
+
+  # One-off job to seed Firestore (run manually from Render dashboard)
+  - type: cron
+    name: careerquest-seed-firestore
+    env: node
+    branch: main
+    schedule: "0 0 * * *"  # Runs daily at midnight UTC (disabled by default in Render)
+    buildCommand: npm install
+    command: npx tsx server/seed-firestore.ts
+    # IMPORTANT: This job will only run if you manually trigger it from the Render dashboard.
+    # It uses the same environment variables as the web service.
+    # To use it:
+    # 1. Deploy the web service first (steps below).
+    # 2. In Render dashboard, find "careerquest-seed-firestore" job.
+    # 3. Click "Run Job" to execute seeding manually (or set schedule if desired).
+
+# To deploy using this file:
+# 
+# STEP 1: Push to GitHub
+# ----------------------
+# 1. Commit and push your repo to GitHub (main branch):
+#    git add .
+#    git commit -m "Add render.yaml and Render deployment config"
+#    git push -u origin main
+#
+# STEP 2: Create Render Web Service
+# ----------------------------------
+# 1. Go to https://render.com and sign in (or create account).
+# 2. Click "New" button → select "Web Service".
+# 3. Under "Connect a repository", search for and select your GitHub repo (CareerQuestAI).
+# 4. Select branch: "main".
+# 5. Fill in:
+#    - Name: careerquest (or any name)
+#    - Environment: Node
+#    - Build Command: npm run build
+#    - Start Command: npm run start
+#    - Plan: Free (or paid if preferred)
+# 6. Click "Create Web Service".
+# 7. Render will start building (watch the logs).
+#
+# STEP 3: Add Environment Variables (Secrets)
+# --------------------------------------------
+# 1. After service is created, go to service dashboard.
+# 2. Click "Environment" in the left sidebar.
+# 3. Click "Add Secret File" OR add each secret individually:
+#    Add the following secrets (copy from your local .env but add them one by one in Render):
+#
+#    FIREBASE_API_KEY: [your Firebase API key]
+#    FIREBASE_AUTH_DOMAIN: [your Firebase auth domain]
+#    FIREBASE_PROJECT_ID: [your Firebase project ID]
+#    FIREBASE_STORAGE_BUCKET: [your Firebase storage bucket]
+#    FIREBASE_MESSAGING_SENDER_ID: [your Firebase messaging sender ID]
+#    FIREBASE_APP_ID: [your Firebase app ID]
+#    OPENAI_API_KEY: [your OpenAI/Bytez API key]
+#    SESSION_SECRET: [your session secret - use the one from .env]
+#    JUDGE0_API_KEY: [optional - only if using code execution]
+#
+# 4. Click "Save" after adding each secret.
+# 5. Render will automatically redeploy the service with the new env vars.
+#
+# STEP 4: Verify Deployment
+# --------------------------
+# 1. Wait for deployment to complete (watch "Logs" tab).
+# 2. Once "Live" appears, click the URL at the top to open your deployed app.
+# 3. Test login with the seeded user (created in step below).
+#
+# STEP 5: Seed Firestore (Optional)
+# ----------------------------------
+# 1. In Render dashboard, find the "careerquest-seed-firestore" job.
+# 2. Click "Run Job" to execute seeding on production Firestore.
+#    (This will add career paths, badges, quizzes, modules, lessons, and test users)
+# 3. Check logs to confirm success (look for "✅ Firestore seed completed successfully!").
+# 4. After seeding, your app will have data ready for use.
+#    - Test user: test@careerquest.com / password123
+#    - Admin user: admin@careerquest.com / admin123

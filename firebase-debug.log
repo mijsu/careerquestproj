@@ -1,0 +1,28 @@
+[debug] [2025-11-04T16:28:41.123Z] ----------------------------------------------------------------------
+[debug] [2025-11-04T16:28:41.125Z] Command:       /nix/store/lz7iav1hd92jbv44zf2rdd7b2mj23536-nodejs-20.19.3/bin/node /home/runner/workspace/.config/npm/node_global/bin/firebase use --add
+[debug] [2025-11-04T16:28:41.125Z] CLI Version:   14.23.0
+[debug] [2025-11-04T16:28:41.125Z] Platform:      linux
+[debug] [2025-11-04T16:28:41.125Z] Node Version:  v20.19.3
+[debug] [2025-11-04T16:28:41.125Z] Time:          Tue Nov 04 2025 16:28:41 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-11-04T16:28:41.125Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-04T16:28:41.505Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-04T16:28:41.505Z] > authorizing via signed-in user (kennethayonon93@gmail.com)
+[debug] [2025-11-04T16:28:41.507Z] Checked if tokens are valid: true, expires at: 1762276267820
+[debug] [2025-11-04T16:28:41.507Z] Checked if tokens are valid: true, expires at: 1762276267820
+[debug] [2025-11-04T16:28:41.509Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-11-04T16:28:42.165Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-11-04T16:28:42.166Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2025-11-04T16:28:42.181Z] ValidationError: [select prompt] No selectable choices. All choices are disabled.
+    at /home/runner/workspace/.config/npm/node_global/lib/node_modules/firebase-tools/node_modules/@inquirer/select/dist/commonjs/index.js:67:19
+    at /home/runner/workspace/.config/npm/node_global/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/use-memo.js:11:27
+    at withPointer (/home/runner/workspace/.config/npm/node_global/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/hook-engine.js:79:25)
+    at useMemo (/home/runner/workspace/.config/npm/node_global/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/use-memo.js:6:45)
+    at /home/runner/workspace/.config/npm/node_global/lib/node_modules/firebase-tools/node_modules/@inquirer/select/dist/commonjs/index.js:63:39
+    at /home/runner/workspace/.config/npm/node_global/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/create-prompt.js:120:38
+    at store.handleChange (/home/runner/workspace/.config/npm/node_global/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/hook-engine.js:31:17)
+    at cycle (/home/runner/workspace/.config/npm/node_global/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/hook-engine.js:33:19)
+    at /home/runner/workspace/.config/npm/node_global/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/create-prompt.js:118:13
+    at /home/runner/workspace/.config/npm/node_global/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/hook-engine.js:35:16
+[error] 
+[error] Error: An unexpected error has occurred.
